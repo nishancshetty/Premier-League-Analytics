@@ -9,22 +9,22 @@ import {
 const menuItems = [
   {
     name: "Dashboard",
-    path: "/",
+    path: "/dashboard",
     icon: <FaChartLine />,
   },
   {
     name: "Teams",
-    path: "/teams",
+    path: "/dashboard/teams",
     icon: <FaShieldAlt />,
   },
   {
     name: "Players",
-    path: "/players",
+    path: "/dashboard/players",
     icon: <FaUsers />,
   },
   {
     name: "Fixtures",
-    path: "/fixtures",
+    path: "/dashboard/fixtures",
     icon: <FaFutbol />,
   },
 ];
@@ -44,7 +44,7 @@ function Sidebar() {
             <li key={item.name}>
               <NavLink
                 to={item.path}
-                end={item.path === "/"}
+                end={item.path === "/dashboard"}
                 className={({ isActive }) =>
                   `flex items-center gap-3 p-3 rounded-lg transition-colors ${
                     isActive
@@ -59,6 +59,15 @@ function Sidebar() {
             </li>
           ))}
         </ul>
+
+        <div className="pt-6 mt-6 border-t border-slate-800">
+          <NavLink
+            to="/"
+            className="flex items-center gap-3 p-3 text-sm text-cyan-400 hover:bg-slate-800/60 rounded-lg transition-colors"
+          >
+            <span>← PL/X Experience</span>
+          </NavLink>
+        </div>
       </nav>
     </aside>
   );
