@@ -1,6 +1,25 @@
 {
+  "name": "premier-league-analytics-backend",
+  "version": "1.0.0",
+  "description": "Backend for Premier League Analytics",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
+    "axios": "^1.20.0",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.4",
+    "express": "^5.2.1",
+    "mongoose": "^9.10.3",
+    "morgan": "^1.12.1",
+    "node-cron": "^4.6.0",
+    "socket.io": "^4.8.4",
     "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
