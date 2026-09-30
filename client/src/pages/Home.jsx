@@ -1,75 +1,65 @@
-import DashboardStats from "../components/dashboard/DashboardStats";
-import LeagueTable from "../components/dashboard/LeagueTable";
-import useLiveMatch from "../hooks/useLiveMatch";
+import { useEffect, useState } from "react";
+import api from "../services/api";
 
 function Home() {
-  const liveMatch = useLiveMatch();
+  const [matches, setMatches] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchMatches = async () => {
+      try {
+        const res = await api.get("/football/matches");
+        setMatches(res.data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMatches();
+  }, []);
+
+  if (loading) {
+    return <h2 className="text-white text-2xl">Loading...</h2>;
+  }
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold">Dashboard</h1>
+    <div className="p-8 text-white">
+      <h1 className="text-4xl font-bold mb-8">
+        Premier League Matches
+      </h1>
 
-      <p className="mt-2 text-slate-400">
-        Premier League Analytics Overview
-      </p>
+      <div className="grid gap-5">
+        {matches.map((match) => (
+          <div
+            key={match.id}
+            className="bg-slate-800 rounded-xl p-5 shadow-lg"
+          >
+            <h2 className="text-xl font-semibold">
+              {match.homeTeam.shortName || match.homeTeam.name}
+              {"  vs  "}
+              {match.awayTeam.shortName || match.awayTeam.name}
+            </h2>
 
-      {/* Live Match Card */}
-      <div className="mt-6 rounded-xl bg-slate-900 p-6 text-white shadow-lg">
-        <h2 className="mb-4 text-2xl font-bold">Live Match</h2>
+            <p className="mt-2">
+              Status: <strong>{match.status}</strong>
+            </p>
 
-        {liveMatch ? (
-          <>
-            <div className="flex items-center justify-between text-xl font-semibold">
-              <span>{liveMatch.homeTeam}</span>
+            <p>
+              Score:
+              {" "}
+              {match.score.fullTime.home ?? 0}
+              {" - "}
+              {match.score.fullTime.away ?? 0}
+            </p>
 
-              <span className="text-3xl font-bold">
-                {liveMatch.homeScore} - {liveMatch.awayScore}
-              </span>
-
-              <span>{liveMatch.awayTeam}</span>
-            </div>
-
-            <div className="mt-4 flex justify-between text-slate-300">
-              <span>{liveMatch.minute}'</span>
-
-              <span>{liveMatch.status}</span>
-            </div>
-
-            <hr className="my-4 border-slate-700" />
-
-            <h3 className="mb-2 text-lg font-semibold">Match Events</h3>
-
-            {liveMatch.events.length === 0 ? (
-              <p className="text-slate-400">No events yet.</p>
-            ) : (
-              <div className="space-y-2">
-                {liveMatch.events.map((event, index) => (
-                  <div
-                    key={index}
-                    className="flex justify-between rounded-md bg-slate-800 p-3"
-                  >
-                    <span>{event.minute}'</span>
-
-                    <span>
-                      {event.type} • {event.player}
-                    </span>
-
-                    <span>{event.team}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </>
-        ) : (
-          <p className="text-slate-400">
-            Waiting for live match updates...
-          </p>
-        )}
+            <p className="text-gray-400 mt-2">
+              {new Date(match.utcDate).toLocaleString()}
+            </p>
+          </div>
+        ))}
       </div>
-
-      <DashboardStats />
-
-      <LeagueTable />
     </div>
   );
 }
