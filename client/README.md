@@ -1,16 +1,144 @@
-# React + Vite
+# ⚽ Premier League Analytics
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A modern full-stack football analytics platform inspired by **Sofascore**, **FBref**, and **Opta**.
 
-Currently, two official plugins are available:
+The goal of this project is to provide real-time Premier League statistics, fixtures, analytics, AI-powered predictions, and interactive visualizations through a modern web application.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Real Premier League Fixtures
+- Express REST API
+- Football-Data.org Integration
+- Socket.IO Real-Time Communication
+- React + Vite Frontend
+- Responsive UI
+- Modern Dashboard
+- Live Match Architecture
+- Scalable Backend
 
-## Expanding the Oxlint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Tech Stack
+
+### Frontend
+
+- React
+- Vite
+- React Router
+- Axios
+- Chart.js
+- Framer Motion
+
+### Backend
+
+- Node.js
+- Express.js
+- Socket.IO
+- Axios
+- Football-Data.org API
+
+### Database (Upcoming)
+
+- MongoDB
+- Mongoose
+
+---
+
+## Project Structure
+
+```text
+client/
+backend/
+controllers/
+routes/
+services/
+models/
+```
+
+---
+
+## Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/nishancshetty/Premier-League-Analytics.git
+```
+
+Install backend
+
+```bash
+npm install
+```
+
+Install frontend
+
+```bash
+cd client
+npm install
+```
+
+Start backend
+
+```bash
+npm run dev
+```
+
+Start frontend
+
+```bash
+cd client
+npm run dev
+```
+
+---
+
+## Current Progress
+
+- React Frontend
+- Express Backend
+- REST API
+- Football API Integration
+- Live Fixtures
+- Socket.IO Connection
+
+---
+
+## Upcoming Features
+
+- Live Match Tracking
+- League Table
+- Team Statistics
+- Player Statistics
+- Match Analytics
+- xG Visualizations
+- Heatmaps
+- Passing Networks
+- Player Comparison
+- Team Comparison
+- AI Match Predictions
+- AI Match Summaries
+- Transfer Centre
+- Injury Tracker
+- Authentication
+- User Profiles
+- Favorites
+
+---
+
+## Project Status
+
+Currently under active development.
+
+New features are being added incrementally following a scalable architecture.
+
+---
+
+## Author
+
+**Nishan Shetty**
+
+GitHub:
+https://github.com/nishancshetty
