@@ -43,7 +43,6 @@ function startLiveMatchEngine() {
       liveMatch.status = "FULL TIME";
     }
 
-    // Broadcast latest match
     getIO().emit("liveMatchUpdate", liveMatch);
 
     console.log(

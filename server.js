@@ -11,7 +11,6 @@ const server = http.createServer(app);
 
 initializeSocket(server);
 
-console.log(process.env.FOOTBALL_API_KEY);
 server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 
