@@ -4,6 +4,11 @@ const morgan = require("morgan");
 
 const footballRoutes = require("./routes/footballRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
+const standingsRoutes = require("./routes/standingsRoutes");
+const teamRoutes = require("./routes/teamRoutes");
+const playerRoutes = require("./routes/playerRoutes");
+const searchRoutes = require("./routes/searchRoutes");
+const analyticsRoutes = require("./routes/analyticsRoutes");
 
 const app = express();
 
@@ -23,6 +28,11 @@ app.get("/", (req, res) => {
 // API Routes
 app.use("/api/football", footballRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/standings", standingsRoutes);
+app.use("/api/team", teamRoutes);
+app.use("/api/player", playerRoutes);
+app.use("/api/search", searchRoutes);
+app.use("/api/analytics", analyticsRoutes);
 
 // 404 Handler
 app.use((req, res) => {
