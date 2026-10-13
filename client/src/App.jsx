@@ -7,6 +7,8 @@ import LiveMatch from "./pages/LiveMatch";
 import Standings from "./pages/Standings";
 import Team from "./pages/Team";
 import Player from "./pages/Player";
+import Analytics from "./pages/Analytics";
+import PlayerComparison from "./pages/PlayerComparison";
 
 import Layout from "./components/layout/Layout";
 
@@ -65,6 +67,24 @@ function App() {
         element={
           <Layout>
             <Player />
+          </Layout>
+        }
+      />
+
+      <Route
+        path="/analytics"
+        element={
+          <Layout>
+            <Analytics />
+          </Layout>
+        }
+      />
+
+      <Route
+        path="/comparison"
+        element={
+          <Layout>
+            <PlayerComparison />
           </Layout>
         }
       />
