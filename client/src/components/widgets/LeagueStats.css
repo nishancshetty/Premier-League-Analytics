@@ -1,0 +1,28 @@
+.league-stats{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.league-stats div{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+    padding:30px;
+    transition:.3s;
+}
+
+.league-stats div:hover{
+    transform:translateY(-5px);
+    border-color:#1EF2C5;
+}
+
+.league-stats h2{
+    color:#1EF2C5;
+    font-size:38px;
+    margin-bottom:10px;
+}
+
+.league-stats p{
+    color:#b5b5b5;
+}

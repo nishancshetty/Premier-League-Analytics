@@ -1,23 +1,16 @@
-import Sidebar from "./Sidebar";
-import Navbar from "./Navbar";
+import Desktop from "../os/Desktop";
+import Dock from "../os/Dock";
+import WindowManager from "../os/WindowManager";
 
-function Layout({ children }) {
+function Layout() {
   return (
-    <div className="min-h-screen flex bg-slate-950">
+    <Desktop>
 
-      <Sidebar />
+      <WindowManager />
 
-      <div className="flex-1 flex flex-col">
+      <Dock />
 
-        <Navbar />
-
-        <main className="flex-1 p-8 overflow-y-auto">
-          {children}
-        </main>
-
-      </div>
-
-    </div>
+    </Desktop>
   );
 }
 

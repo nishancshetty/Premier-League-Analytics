@@ -1,0 +1,54 @@
+.live-card{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(20px);
+    border-radius:24px;
+    padding:28px;
+    transition:.35s;
+}
+
+.live-card:hover{
+    transform:translateY(-6px);
+    border-color:#1EF2C5;
+    box-shadow:0 0 35px rgba(30,242,197,.18);
+}
+
+.live-header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#1EF2C5;
+    font-weight:700;
+    letter-spacing:2px;
+    margin-bottom:30px;
+}
+
+.live-dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#1EF2C5;
+    box-shadow:0 0 12px #1EF2C5;
+}
+
+.teams{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    text-align:center;
+}
+
+.teams h1{
+    font-size:48px;
+}
+
+.teams h2{
+    font-size:20px;
+    margin-bottom:6px;
+}
+
+.live-card p{
+    margin-top:24px;
+    text-align:center;
+    color:#bdbdbd;
+}

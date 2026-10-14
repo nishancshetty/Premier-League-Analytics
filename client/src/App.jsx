@@ -1,13 +1,13 @@
 import { Routes, Route } from "react-router-dom";
 
 import LandingPage from "./pages/LandingPage";
-import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
 import Fixtures from "./pages/Fixtures";
 import LiveMatch from "./pages/LiveMatch";
 import Standings from "./pages/Standings";
 import Team from "./pages/Team";
+import Teams from "./pages/Teams";
 import Player from "./pages/Player";
-import Analytics from "./pages/Analytics";
 import PlayerComparison from "./pages/PlayerComparison";
 
 import Layout from "./components/layout/Layout";
@@ -15,17 +15,30 @@ import Layout from "./components/layout/Layout";
 function App() {
   return (
     <Routes>
+      {/* Landing Page */}
       <Route path="/" element={<LandingPage />} />
 
+      {/* Dashboard */}
       <Route
         path="/dashboard"
         element={
           <Layout>
-            <Home />
+            <Dashboard />
           </Layout>
         }
       />
 
+      {/* Teams */}
+      <Route
+        path="/teams"
+        element={
+          <Layout>
+            <Teams />
+          </Layout>
+        }
+      />
+
+      {/* Fixtures */}
       <Route
         path="/fixtures"
         element={
@@ -35,6 +48,7 @@ function App() {
         }
       />
 
+      {/* Live Match */}
       <Route
         path="/live"
         element={
@@ -44,6 +58,7 @@ function App() {
         }
       />
 
+      {/* Standings */}
       <Route
         path="/standings"
         element={
@@ -53,6 +68,7 @@ function App() {
         }
       />
 
+      {/* Team Page */}
       <Route
         path="/team/:id"
         element={
@@ -62,6 +78,7 @@ function App() {
         }
       />
 
+      {/* Player Page */}
       <Route
         path="/player/:id"
         element={
@@ -71,17 +88,9 @@ function App() {
         }
       />
 
+      {/* AI Player Comparison */}
       <Route
-        path="/analytics"
-        element={
-          <Layout>
-            <Analytics />
-          </Layout>
-        }
-      />
-
-      <Route
-        path="/comparison"
+        path="/compare"
         element={
           <Layout>
             <PlayerComparison />

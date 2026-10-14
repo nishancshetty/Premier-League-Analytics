@@ -1,0 +1,38 @@
+.teams-page{
+padding:40px;
+background:#050505;
+min-height:100vh;
+color:white;
+}
+
+.teams-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:50px;
+}
+
+.teams-header h1{
+font-size:48px;
+font-weight:900;
+}
+
+.teams-header input{
+width:320px;
+padding:16px;
+background:#111;
+border:1px solid rgba(255,255,255,.08);
+border-radius:14px;
+color:white;
+outline:none;
+}
+
+.teams-header input:focus{
+border-color:#1EF2C5;
+}
+
+.teams-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+gap:28px;
+}

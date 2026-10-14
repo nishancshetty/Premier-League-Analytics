@@ -12,7 +12,9 @@ const analyticsRoutes = require("./routes/analyticsRoutes");
 const comparisonRoutes = require("./routes/comparisonRoutes");
 
 const app = express();
+const fixturesRoutes = require("./routes/fixturesRoutes");
 
+app.use("/api/fixtures", fixturesRoutes);
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));

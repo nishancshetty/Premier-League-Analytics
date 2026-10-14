@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../services/api";
 
+import PlayerHeader from "../components/player/PlayerHeader";
+import PlayerStats from "../components/player/PlayerStats";
+import PlayerRadar from "../components/player/PlayerRadar";
+import PlayerComparisonCard from "../components/player/PlayerComparisonCard";
+
 function Player() {
   const { id } = useParams();
 
@@ -9,9 +14,10 @@ function Player() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchPlayer = async () => {
+    const loadPlayer = async () => {
       try {
-        const res = await api.get(`/player/${id}`);
+        const res = await api.get(`/players/${id}`);
+
         setPlayer(res.data);
       } catch (err) {
         console.error(err);
@@ -20,88 +26,36 @@ function Player() {
       }
     };
 
-    fetchPlayer();
+    loadPlayer();
   }, [id]);
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-full text-white">
-        <h1 className="text-3xl font-bold">
-          Loading Player...
-        </h1>
+      <div className="flex justify-center items-center h-screen text-white text-3xl">
+        Loading Player...
       </div>
     );
   }
 
   if (!player) {
     return (
-      <div className="flex items-center justify-center h-full text-red-500">
-        Player not found.
+      <div className="flex justify-center items-center h-screen text-red-500 text-3xl">
+        Player Not Found
       </div>
     );
   }
 
   return (
-    <div className="max-w-6xl mx-auto text-white">
+    <div className="max-w-7xl mx-auto p-8">
 
-      <div className="bg-slate-900 rounded-2xl p-8 shadow-xl">
+      <PlayerHeader player={player} />
 
-        <h1 className="text-5xl font-bold">
-          {player.name}
-        </h1>
+      <PlayerStats player={player} />
 
-        <div className="grid md:grid-cols-2 gap-6 mt-8">
+      <PlayerRadar player={player} />
 
-          <div className="space-y-3">
-
-            <p>
-              <strong>Position:</strong>{" "}
-              {player.position || "Unknown"}
-            </p>
-
-            <p>
-              <strong>Nationality:</strong>{" "}
-              {player.nationality}
-            </p>
-
-            <p>
-              <strong>Date of Birth:</strong>{" "}
-              {player.dateOfBirth}
-            </p>
-
-            <p>
-              <strong>Current Team:</strong>{" "}
-              {player.currentTeam?.name || "Unknown"}
-            </p>
-
-          </div>
-
-          <div className="space-y-3">
-
-            <p>
-              <strong>First Name:</strong>{" "}
-              {player.firstName || "-"}
-            </p>
-
-            <p>
-              <strong>Last Name:</strong>{" "}
-              {player.lastName || "-"}
-            </p>
-
-            <p>
-              <strong>Shirt Number:</strong>{" "}
-              {player.shirtNumber || "-"}
-            </p>
-
-            <p>
-              <strong>Last Updated:</strong>{" "}
-              {new Date(player.lastUpdated).toLocaleDateString()}
-            </p>
-
-          </div>
-
-        </div>
-
+      <div className="mt-8">
+        <PlayerComparisonCard player={player} />
       </div>
 
     </div>
