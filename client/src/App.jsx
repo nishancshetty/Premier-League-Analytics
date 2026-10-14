@@ -9,94 +9,32 @@ import Team from "./pages/Team";
 import Teams from "./pages/Teams";
 import Player from "./pages/Player";
 import PlayerComparison from "./pages/PlayerComparison";
+import AILab from "./pages/AILab";
 
 import Layout from "./components/layout/Layout";
 
 function App() {
   return (
     <Routes>
-      {/* Landing Page */}
       <Route path="/" element={<LandingPage />} />
 
-      {/* Dashboard */}
-      <Route
-        path="/dashboard"
-        element={
-          <Layout>
-            <Dashboard />
-          </Layout>
-        }
-      />
+      <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
 
-      {/* Teams */}
-      <Route
-        path="/teams"
-        element={
-          <Layout>
-            <Teams />
-          </Layout>
-        }
-      />
+      <Route path="/teams" element={<Layout><Teams /></Layout>} />
 
-      {/* Fixtures */}
-      <Route
-        path="/fixtures"
-        element={
-          <Layout>
-            <Fixtures />
-          </Layout>
-        }
-      />
+      <Route path="/fixtures" element={<Layout><Fixtures /></Layout>} />
 
-      {/* Live Match */}
-      <Route
-        path="/live"
-        element={
-          <Layout>
-            <LiveMatch />
-          </Layout>
-        }
-      />
+      <Route path="/live" element={<Layout><LiveMatch /></Layout>} />
 
-      {/* Standings */}
-      <Route
-        path="/standings"
-        element={
-          <Layout>
-            <Standings />
-          </Layout>
-        }
-      />
+      <Route path="/standings" element={<Layout><Standings /></Layout>} />
 
-      {/* Team Page */}
-      <Route
-        path="/team/:id"
-        element={
-          <Layout>
-            <Team />
-          </Layout>
-        }
-      />
+      <Route path="/team/:id" element={<Layout><Team /></Layout>} />
 
-      {/* Player Page */}
-      <Route
-        path="/player/:id"
-        element={
-          <Layout>
-            <Player />
-          </Layout>
-        }
-      />
+      <Route path="/player/:id" element={<Layout><Player /></Layout>} />
 
-      {/* AI Player Comparison */}
-      <Route
-        path="/compare"
-        element={
-          <Layout>
-            <PlayerComparison />
-          </Layout>
-        }
-      />
+      <Route path="/compare" element={<Layout><PlayerComparison /></Layout>} />
+
+      <Route path="/ai" element={<Layout><AILab /></Layout>} />
     </Routes>
   );
 }

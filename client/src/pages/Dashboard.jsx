@@ -1,6 +1,7 @@
+import "./Dashboard.css";
+
 import Sidebar from "../components/layout/Sidebar";
 import Topbar from "../components/layout/Topbar";
-import ContentWrapper from "../components/layout/ContentWrapper";
 
 import DashboardHero from "../components/dashboard/DashboardHero";
 import DashboardStats from "../components/dashboard/DashboardStats";
@@ -14,57 +15,72 @@ import LeagueStats from "../components/widgets/LeagueStats";
 import CommandCenter from "../components/command/CommandCenter";
 import SystemStatus from "../components/command/SystemStatus";
 
+import AnalyticsPanel from "../components/analytics/AnalyticsPanel";
+
 function Dashboard() {
   return (
     <div className="dashboard-page">
+
       <Sidebar />
 
       <div className="dashboard-main">
+
         <Topbar />
 
-        <ContentWrapper>
+        <div className="dashboard-content">
 
           <DashboardHero />
 
           <DashboardStats />
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "2fr 1fr",
-              gap: "24px",
-              marginTop: "24px",
-              alignItems: "start",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "24px",
-              }}
-            >
-              <LeagueTable />
-              <RecentFixtures />
-              <CommandCenter />
+          <div className="dashboard-grid">
+
+            <div className="dashboard-left">
+
+              <div className="dashboard-section">
+                <LeagueTable />
+              </div>
+
+              <div className="dashboard-section">
+                <RecentFixtures />
+              </div>
+
+              <div className="dashboard-section">
+                <CommandCenter />
+              </div>
+
+              <div className="dashboard-section">
+                <AnalyticsPanel />
+              </div>
+
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "24px",
-              }}
-            >
-              <LiveMatchCard />
-              <AIPrediction />
-              <LeagueStats />
-              <SystemStatus />
+            <div className="dashboard-right">
+
+              <div className="dashboard-section">
+                <LiveMatchCard />
+              </div>
+
+              <div className="dashboard-section">
+                <AIPrediction />
+              </div>
+
+              <div className="dashboard-section">
+                <LeagueStats />
+              </div>
+
+              <div className="dashboard-section">
+                <SystemStatus />
+              </div>
+
             </div>
+
           </div>
 
-        </ContentWrapper>
+        </div>
+
       </div>
+
     </div>
   );
 }
