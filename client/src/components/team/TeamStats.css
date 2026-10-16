@@ -1,0 +1,35 @@
+.team-stats-grid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:20px;
+
+}
+
+.stat-box{
+
+background:#101010;
+
+padding:24px;
+
+border-radius:20px;
+
+}
+
+.stat-box h3{
+
+color:#777;
+
+margin-bottom:12px;
+
+}
+
+.stat-box span{
+
+font-size:22px;
+
+font-weight:700;
+
+}

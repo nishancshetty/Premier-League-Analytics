@@ -1,6 +1,11 @@
 import "./TeamCard.css";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import {
+  FaTrophy,
+  FaFutbol,
+  FaShieldAlt,
+} from "react-icons/fa";
 
 function TeamCard({ club }) {
   const navigate = useNavigate();
@@ -9,33 +14,91 @@ function TeamCard({ club }) {
     <motion.div
       className="team-card"
       whileHover={{
-        y: -10,
-        scale: 1.03,
+        y: -8,
+        scale: 1.02,
       }}
       transition={{ duration: 0.25 }}
       onClick={() => navigate(`/team/${club.team.id}`)}
     >
-      <img
-        src={club.team.crest}
-        alt={club.team.name}
-      />
+      <div className="team-header">
 
-      <h2>{club.team.name}</h2>
+        <img
+          src={club.team.crest}
+          alt={club.team.name}
+        />
 
-      <div className="team-info">
-        <span>#{club.position}</span>
-        <span>{club.points} pts</span>
+        <div>
+
+          <h2>{club.team.name}</h2>
+
+          <span>Premier League</span>
+
+        </div>
+
       </div>
 
-      <div className="team-record">
-        <span>W {club.won}</span>
-        <span>D {club.draw}</span>
-        <span>L {club.lost}</span>
+      <div className="team-stats">
+
+        <div>
+
+          <FaTrophy />
+
+          <span>#{club.position}</span>
+
+        </div>
+
+        <div>
+
+          <FaShieldAlt />
+
+          <span>{club.points} pts</span>
+
+        </div>
+
+        <div>
+
+          <FaFutbol />
+
+          <span>{club.goalsFor} Goals</span>
+
+        </div>
+
       </div>
 
-      <div className="goal-difference">
-        GD {club.goalDifference}
+      <div className="record">
+
+        <div>
+
+          <strong>{club.won}</strong>
+
+          <p>Wins</p>
+
+        </div>
+
+        <div>
+
+          <strong>{club.draw}</strong>
+
+          <p>Draws</p>
+
+        </div>
+
+        <div>
+
+          <strong>{club.lost}</strong>
+
+          <p>Losses</p>
+
+        </div>
+
       </div>
+
+      <button>
+
+        View Club →
+
+      </button>
+
     </motion.div>
   );
 }

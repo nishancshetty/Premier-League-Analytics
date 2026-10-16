@@ -1,0 +1,11 @@
+.team-page {
+  min-height: 100vh;
+  background: #050505;
+  color: white;
+  padding: 40px;
+}
+
+.team-page h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}

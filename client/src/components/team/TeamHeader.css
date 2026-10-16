@@ -1,0 +1,41 @@
+.team-header{
+
+display:flex;
+
+align-items:center;
+
+gap:30px;
+
+background:#0b0b0b;
+
+padding:30px;
+
+border-radius:24px;
+
+}
+
+.team-header img{
+
+width:120px;
+
+height:120px;
+
+object-fit:contain;
+
+}
+
+.team-header h1{
+
+font-size:48px;
+
+margin-bottom:10px;
+
+}
+
+.team-header p{
+
+color:#888;
+
+font-size:18px;
+
+}

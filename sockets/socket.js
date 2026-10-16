@@ -1,34 +1,47 @@
 let io;
+const liveMatchService = require("../services/matchService");
 
 const initializeSocket = (server) => {
-    const { Server } = require("socket.io");
+  const { Server } = require("socket.io");
 
-    io = new Server(server, {
-        cors: {
-            origin: "http://localhost:5173",
-            methods: ["GET", "POST"]
-        }
+  io = new Server(server, {
+    cors: {
+      origin: "*",
+      methods: ["GET", "POST"],
+    },
+  });
+
+  io.on("connection", (socket) => {
+    console.log(`Live Client Connected: ${socket.id}`);
+
+    // Immediately send current live match state
+    socket.emit("liveMatchUpdate", liveMatchService.getLiveState());
+
+    socket.on("requestLiveUpdate", () => {
+      socket.emit("liveMatchUpdate", liveMatchService.getLiveState());
     });
 
-    io.on("connection", (socket) => {
-        console.log(`Client Connected: ${socket.id}`);
-
-        socket.on("disconnect", () => {
-            console.log(`Client Disconnected: ${socket.id}`);
-        });
+    socket.on("resetSimulation", () => {
+      liveMatchService.reset();
+      io.emit("liveMatchUpdate", liveMatchService.getLiveState());
     });
 
-    return io;
+    socket.on("disconnect", () => {
+      console.log(`Live Client Disconnected: ${socket.id}`);
+    });
+  });
+
+  return io;
 };
 
 const getIO = () => {
-    if (!io) {
-        throw new Error("Socket.IO not initialized.");
-    }
-    return io;
+  if (!io) {
+    throw new Error("Socket.IO not initialized.");
+  }
+  return io;
 };
 
 module.exports = {
-    initializeSocket,
-    getIO
+  initializeSocket,
+  getIO,
 };

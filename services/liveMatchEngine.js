@@ -1,54 +1,28 @@
-const liveMatch = require("./matchService");
+const liveMatchService = require("./matchService");
 const { getIO } = require("../sockets/socket");
 
-let minute = 0;
-
 function startLiveMatchEngine() {
-  setInterval(() => {
-    minute++;
-    liveMatch.minute = minute;
+  let interval = setInterval(() => {
+    try {
+      const match = liveMatchService.tick();
 
-    // Simulate goals
-    if (minute === 12) {
-      liveMatch.homeScore++;
-      liveMatch.events.push({
-        minute,
-        type: "GOAL",
-        team: liveMatch.homeTeam,
-        player: "Erling Haaland",
-      });
+      try {
+        getIO().emit("liveMatchUpdate", match);
+      } catch (ioErr) {
+        // Socket might not have connected yet
+      }
+
+      if (match.status === "FULL TIME" && match.minute >= 96) {
+        setTimeout(() => {
+          liveMatchService.reset();
+        }, 15000);
+      }
+    } catch (err) {
+      console.error("Live Match Engine Error:", err);
     }
+  }, 3500);
 
-    if (minute === 31) {
-      liveMatch.awayScore++;
-      liveMatch.events.push({
-        minute,
-        type: "GOAL",
-        team: liveMatch.awayTeam,
-        player: "Mohamed Salah",
-      });
-    }
-
-    if (minute === 57) {
-      liveMatch.homeScore++;
-      liveMatch.events.push({
-        minute,
-        type: "GOAL",
-        team: liveMatch.homeTeam,
-        player: "Phil Foden",
-      });
-    }
-
-    if (minute >= 90) {
-      liveMatch.status = "FULL TIME";
-    }
-
-    getIO().emit("liveMatchUpdate", liveMatch);
-
-    console.log(
-      `[${liveMatch.minute}'] ${liveMatch.homeTeam} ${liveMatch.homeScore} - ${liveMatch.awayScore} ${liveMatch.awayTeam}`
-    );
-  }, 3000);
+  return interval;
 }
 
 module.exports = startLiveMatchEngine;
