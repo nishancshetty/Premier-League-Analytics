@@ -16,7 +16,6 @@ import {
   getTopScorers,
   getMatchPrediction,
 } from "../services/api";
-import socket from "../services/socket";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -24,7 +23,6 @@ function Dashboard() {
   const [standings, setStandings] = useState([]);
   const [topScorers, setTopScorers] = useState([]);
   const [featuredPrediction, setFeaturedPrediction] = useState(null);
-  const [liveMatch, setLiveMatch] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -39,7 +37,6 @@ function Dashboard() {
 
         if (dash) {
           setDashboardData(dash);
-          if (dash.liveMatch) setLiveMatch(dash.liveMatch);
         }
         setStandings(table || []);
         setTopScorers(scorers.slice(0, 5));
@@ -52,13 +49,6 @@ function Dashboard() {
     }
 
     loadInitialData();
-
-    const onLiveUpdate = (updated) => {
-      setLiveMatch(updated);
-    };
-
-    socket.on("liveMatchUpdate", onLiveUpdate);
-    return () => socket.off("liveMatchUpdate", onLiveUpdate);
   }, []);
 
   if (loading) {

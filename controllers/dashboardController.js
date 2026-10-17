@@ -1,7 +1,6 @@
 const { getAllMatches } = require("../services/fixturesService");
 const { getPremierLeagueStandings } = require("../services/standingsService");
 const { getTopScorers } = require("../services/playerService");
-const liveMatchService = require("../services/matchService");
 
 const getDashboardData = async (req, res) => {
   try {
@@ -58,7 +57,6 @@ const getDashboardData = async (req, res) => {
         },
         recentResults,
         upcomingFixtures,
-        liveMatch: liveMatchService.getLiveState(),
       },
     });
   } catch (err) {

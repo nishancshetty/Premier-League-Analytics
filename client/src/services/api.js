@@ -91,16 +91,6 @@ export async function getSeasonForecast() {
   return data.data;
 }
 
-export async function getLiveMatch() {
-  const { data } = await api.get("/live");
-  return data.data;
-}
-
-export async function resetLiveMatch() {
-  const { data } = await api.post("/live/reset");
-  return data.data;
-}
-
 export async function getInjuries() {
   const { data } = await api.get("/news/injuries");
   return data.data;

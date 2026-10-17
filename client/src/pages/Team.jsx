@@ -345,25 +345,33 @@ function Team() {
               key={m.id}
               className="pl-glass-panel p-5 flex items-center justify-between"
             >
-              <div className="flex items-center gap-3">
-                {m.homeTeam?.crest && <img src={m.homeTeam.crest} alt="home" className="w-8 h-8 object-contain" />}
-                <span className="font-extrabold text-sm text-white">{m.homeTeam?.shortName}</span>
+              <div className="flex-1 min-w-0 flex items-center gap-3">
+                {m.homeTeam?.crest && <img src={m.homeTeam.crest} alt="home" className="w-8 h-8 object-contain flex-shrink-0" />}
+                <span className="font-extrabold text-sm text-white truncate">{m.homeTeam?.shortName}</span>
               </div>
 
-              <div className="px-4 text-center">
+              <div className="px-3 flex-shrink-0 text-center">
                 {m.status === "FINISHED" ? (
-                  <span className="font-black text-white font-mono text-lg">
-                    {m.score?.fullTime?.home} : {m.score?.fullTime?.away}
-                  </span>
+                  <div className="flex items-center justify-center gap-1.5 px-3 py-1 rounded-xl bg-white/[0.05] border border-white/10 whitespace-nowrap">
+                    <span className="font-black text-white font-mono text-sm sm:text-base tabular-nums">
+                      {m.score?.fullTime?.home ?? 0}
+                    </span>
+                    <span className="text-xs font-black text-[#1EF2C5] opacity-75">:</span>
+                    <span className="font-black text-white font-mono text-sm sm:text-base tabular-nums">
+                      {m.score?.fullTime?.away ?? 0}
+                    </span>
+                  </div>
                 ) : (
-                  <span className="text-xs text-[#1EF2C5] font-mono font-black">VS</span>
+                  <div className="px-3 py-1 rounded-xl bg-white/[0.03] border border-white/10 whitespace-nowrap">
+                    <span className="text-xs text-[#1EF2C5] font-mono font-black">VS</span>
+                  </div>
                 )}
-                <span className="text-[10px] text-[#777777] block font-bold uppercase">{m.status}</span>
+                <span className="text-[9px] text-[#777777] block font-bold uppercase mt-1 tracking-wider">{m.status}</span>
               </div>
 
-              <div className="flex items-center gap-3">
-                <span className="font-extrabold text-sm text-white">{m.awayTeam?.shortName}</span>
-                {m.awayTeam?.crest && <img src={m.awayTeam.crest} alt="away" className="w-8 h-8 object-contain" />}
+              <div className="flex-1 min-w-0 flex items-center justify-end gap-3">
+                <span className="font-extrabold text-sm text-white truncate text-right">{m.awayTeam?.shortName}</span>
+                {m.awayTeam?.crest && <img src={m.awayTeam.crest} alt="away" className="w-8 h-8 object-contain flex-shrink-0" />}
               </div>
             </div>
           ))}

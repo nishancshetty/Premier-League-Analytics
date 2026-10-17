@@ -3,7 +3,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Dashboard";
 import Fixtures from "./pages/Fixtures";
-import LiveMatch from "./pages/LiveMatch";
 import Standings from "./pages/Standings";
 import Team from "./pages/Team";
 import Teams from "./pages/Teams";
@@ -46,15 +45,6 @@ function App() {
         element={
           <Layout>
             <Fixtures />
-          </Layout>
-        }
-      />
-
-      <Route
-        path="/live"
-        element={
-          <Layout>
-            <LiveMatch />
           </Layout>
         }
       />

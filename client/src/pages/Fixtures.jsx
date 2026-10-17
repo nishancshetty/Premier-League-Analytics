@@ -98,7 +98,7 @@ function Fixtures() {
 
   return (
     <div className="space-y-6 sm:space-y-8 w-full max-w-full overflow-hidden">
-      {/* Header */}
+      {/* Page Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-[rgba(255,255,255,0.08)] pb-6">
         <div>
           <div className="flex items-center gap-2 text-xs font-black text-[#1EF2C5] tracking-[3px] uppercase mb-1">
@@ -263,12 +263,11 @@ function Fixtures() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 w-full overflow-hidden">
             {filteredMatches.map((match) => {
               const isFinished = match.status === "FINISHED";
-              const isScheduled = match.status === "SCHEDULED" || match.status === "TIMED";
 
               return (
                 <div
                   key={match.id}
-                  className="pl-glass-panel p-5 sm:p-6 flex flex-col justify-between group shadow-xl hover:border-[rgba(30,242,197,0.4)] transition-all duration-300 overflow-hidden"
+                  className="pl-glass-panel p-5 sm:p-6 flex flex-col justify-between group shadow-xl hover:border-[rgba(30,242,197,0.35)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.5)] transition-all duration-300 overflow-hidden"
                 >
                   {/* Top Bar: Status, Matchday & Kickoff Date */}
                   <div className="flex items-center justify-between text-xs text-[#777777] mb-4 pb-3 border-b border-[rgba(255,255,255,0.08)] font-bold gap-2">
@@ -292,19 +291,19 @@ function Fixtures() {
                     </span>
                   </div>
 
-                  {/* Center Scoreboard - Robust Flexbox with min-w-0 to eliminate overflowing */}
+                  {/* Center Scoreboard - Clean, decreased score pill with whitespace-nowrap that fits in correctly */}
                   <div className="flex items-center justify-between py-2 sm:py-3 gap-2 sm:gap-4">
                     {/* Home Team */}
                     <div
                       onClick={() => match.homeTeam?.id && navigate(`/team/${match.homeTeam.id}`)}
-                      className="flex-1 min-w-0 flex items-center gap-2 sm:gap-3 cursor-pointer group/home"
+                      className="flex-1 min-w-0 flex items-center gap-2.5 sm:gap-3.5 cursor-pointer group/home"
                       title={match.homeTeam?.name}
                     >
                       {match.homeTeam?.crest ? (
                         <img
                           src={match.homeTeam.crest}
                           alt="home"
-                          className="w-8 h-8 sm:w-10 sm:h-10 object-contain flex-shrink-0 transition-transform group-hover/home:scale-110"
+                          className="w-8 h-8 sm:w-10 sm:h-10 object-contain flex-shrink-0 transition-transform group-hover/home:scale-110 drop-shadow-md"
                         />
                       ) : (
                         <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-slate-800 flex items-center justify-center font-bold text-xs text-white flex-shrink-0">
@@ -316,23 +315,33 @@ function Fixtures() {
                       </span>
                     </div>
 
-                    {/* Score / VS Center Divider */}
-                    <div className="w-16 sm:w-24 flex-shrink-0 text-center px-1">
+                    {/* Center Score Pill - Properly sized, whitespace-nowrap, never breaks onto multiple lines */}
+                    <div className="flex-shrink-0 flex items-center justify-center px-1 sm:px-2">
                       {isFinished ? (
-                        <div className="text-2xl sm:text-3xl font-black font-mono tracking-wider text-white">
-                          {match.score?.fullTime?.home ?? 0} : {match.score?.fullTime?.away ?? 0}
+                        <div className="flex items-center justify-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-xl bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.12)] group-hover:border-[rgba(30,242,197,0.35)] shadow-inner text-white whitespace-nowrap transition-colors">
+                          <span className="text-base sm:text-lg font-black font-mono text-white tabular-nums">
+                            {match.score?.fullTime?.home ?? 0}
+                          </span>
+                          <span className="text-xs font-black text-[#1EF2C5] opacity-75">
+                            :
+                          </span>
+                          <span className="text-base sm:text-lg font-black font-mono text-white tabular-nums">
+                            {match.score?.fullTime?.away ?? 0}
+                          </span>
                         </div>
                       ) : (
-                        <span className="inline-block px-3 py-1 rounded-xl bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-xs font-mono font-black text-[#1EF2C5]">
-                          VS
-                        </span>
+                        <div className="flex items-center justify-center px-3 py-1.5 rounded-xl bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] whitespace-nowrap">
+                          <span className="text-[11px] font-mono font-black text-[#1EF2C5] tracking-wider">
+                            VS
+                          </span>
+                        </div>
                       )}
                     </div>
 
                     {/* Away Team */}
                     <div
                       onClick={() => match.awayTeam?.id && navigate(`/team/${match.awayTeam.id}`)}
-                      className="flex-1 min-w-0 flex items-center justify-end gap-2 sm:gap-3 cursor-pointer group/away"
+                      className="flex-1 min-w-0 flex items-center justify-end gap-2.5 sm:gap-3.5 cursor-pointer group/away"
                       title={match.awayTeam?.name}
                     >
                       <span className="font-extrabold text-white text-sm sm:text-base truncate text-right group-hover/away:text-[#1EF2C5] transition">
@@ -342,7 +351,7 @@ function Fixtures() {
                         <img
                           src={match.awayTeam.crest}
                           alt="away"
-                          className="w-8 h-8 sm:w-10 sm:h-10 object-contain flex-shrink-0 transition-transform group-hover/away:scale-110"
+                          className="w-8 h-8 sm:w-10 sm:h-10 object-contain flex-shrink-0 transition-transform group-hover/away:scale-110 drop-shadow-md"
                         />
                       ) : (
                         <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-slate-800 flex items-center justify-center font-bold text-xs text-white flex-shrink-0">
@@ -354,11 +363,18 @@ function Fixtures() {
 
                   {/* Action Footer */}
                   <div className="mt-4 pt-3.5 border-t border-[rgba(255,255,255,0.08)] flex items-center justify-between text-xs gap-3">
-                    <span className="text-[#777777] font-semibold truncate text-[11px]">
-                      {isFinished && match.score?.halfTime?.home !== undefined && match.score?.halfTime?.home !== null
-                        ? `HT (${match.score.halfTime.home} - ${match.score.halfTime.away})`
-                        : "Premier League"}
-                    </span>
+                    <div className="flex items-center gap-2 truncate">
+                      <span className="text-[#777777] font-semibold text-[11px] truncate">
+                        {isFinished && match.score?.halfTime?.home !== undefined && match.score?.halfTime?.home !== null
+                          ? `HT (${match.score.halfTime.home} - ${match.score.halfTime.away})`
+                          : "Premier League"}
+                      </span>
+                      {isFinished && (
+                        <span className="text-[10px] font-mono text-[#777777] bg-white/[0.03] px-2 py-0.5 rounded border border-white/5 hidden sm:inline">
+                          FT Result
+                        </span>
+                      )}
+                    </div>
 
                     <button
                       onClick={() =>
