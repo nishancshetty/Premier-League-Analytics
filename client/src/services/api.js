@@ -111,6 +111,36 @@ export async function getTransfers() {
   return data.data;
 }
 
+export async function getLatestNews(params = {}) {
+  const { data } = await api.get("/news/latest", { params });
+  return data;
+}
+
+export async function getClubNews(clubName) {
+  const { data } = await api.get(`/news/club/${encodeURIComponent(clubName)}`);
+  return data;
+}
+
+export async function askAI(prompt, context = {}) {
+  const { data } = await api.post("/ai/ask", { prompt, context });
+  return data;
+}
+
+export async function getAIStatus() {
+  const { data } = await api.get("/ai/status");
+  return data.data;
+}
+
+export async function getSportmonksFixtures(params = {}) {
+  const { data } = await api.get("/sportmonks/fixtures", { params });
+  return data;
+}
+
+export async function getSportmonksStatus() {
+  const { data } = await api.get("/sportmonks/status");
+  return data.data;
+}
+
 export async function searchAll(query) {
   const { data } = await api.get("/search", {
     params: { q: query },

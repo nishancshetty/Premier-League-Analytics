@@ -1,4 +1,9 @@
-const { predictMatch, getSeasonForecast } = require("../services/aiService");
+const {
+  predictMatch,
+  getSeasonForecast,
+  askAIAssistant,
+  getOpenAIStatus,
+} = require("../services/aiService");
 
 const getMatchPrediction = async (req, res) => {
   try {
@@ -34,7 +39,36 @@ const getForecast = async (req, res) => {
   }
 };
 
+const askAI = async (req, res) => {
+  try {
+    const { prompt, context } = req.body;
+    if (!prompt) {
+      return res.status(400).json({ success: false, message: "Prompt is required" });
+    }
+    const response = await askAIAssistant(prompt, context);
+    res.json(response);
+  } catch (error) {
+    console.error("AI Assistant Error:", error);
+    res.status(500).json({
+      success: false,
+      message: "AI assistant service encountered an error",
+    });
+  }
+};
+
+const getAIStatus = async (req, res) => {
+  try {
+    const status = await getOpenAIStatus();
+    res.json({ success: true, data: status });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
 module.exports = {
   getMatchPrediction,
   getForecast,
+  askAI,
+  getAIStatus,
 };
+

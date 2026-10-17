@@ -16,14 +16,10 @@ function Layout({ children }) {
       <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
 
       {/* Main Content Area */}
-      <div
-        className={`flex-1 flex flex-col min-h-screen transition-all duration-300 relative z-10 ${
-          collapsed ? "ml-20" : "ml-64"
-        }`}
-      >
+      <div className="flex-1 min-w-0 flex flex-col min-h-screen transition-all duration-300 relative z-10 w-full overflow-hidden">
         <Topbar />
 
-        <main className="flex-1 p-6 lg:p-10 max-w-7xl w-full mx-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
           {children}
         </main>
       </div>

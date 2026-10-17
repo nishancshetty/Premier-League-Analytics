@@ -1,5 +1,6 @@
 const { getPremierLeagueStandings } = require("./standingsService");
 const { starPlayers, teamEnrichment } = require("../data/plData");
+const { generateTacticalAnalysis, askAIAssistant, getOpenAIStatus } = require("./openaiService");
 
 // Poisson probability function
 function poisson(k, lambda) {
@@ -76,6 +77,26 @@ async function predictMatch(homeTeamId, awayTeamId) {
 
   const mostLikelyScore = topScores[0] || { home: 2, away: 1 };
 
+  // Attempt OpenAI tactical enhancement
+  let openAITactics = null;
+  try {
+    openAITactics = await generateTacticalAnalysis(home.team, away.team, {
+      homeXG,
+      awayXG,
+      homeWinProb: homePercent,
+      awayWinProb: awayPercent,
+      drawProb: drawPercent,
+    });
+  } catch (err) {
+    // Graceful fallback to deterministic tactical model
+  }
+
+  const tacticalInsight = openAITactics?.tacticalInsight ||
+    `AI Engine projects ${home.team.shortName} having ${Math.round(52 + (homePercent - awayPercent) * 0.2)}% territory possession. Expect high pressing intensity from both units with counter-attacking overloads in wide areas.`;
+
+  const keyMatchupInsight = openAITactics?.keyMatchupInsight ||
+    `${keyHomePlayer.name} will exploit half-spaces against ${away.team.name}'s high-line transition.`;
+
   return {
     homeTeam: {
       id: home.team.id,
@@ -107,10 +128,11 @@ async function predictMatch(homeTeamId, awayTeamId) {
       homePlayerRole: keyHomePlayer.position,
       awayPlayer: keyAwayPlayer.name,
       awayPlayerRole: keyAwayPlayer.position,
-      insight: `${keyHomePlayer.name} will exploit half-spaces against ${away.team.name}'s high-line transition.`,
+      insight: keyMatchupInsight,
     },
-    tacticalInsight: `AI Engine projects ${home.team.shortName} having ${Math.round(52 + (homePercent - awayPercent) * 0.2)}% territory possession. Expect high pressing intensity from both units with counter-attacking overloads in wide areas.`,
+    tacticalInsight,
     confidence: Math.max(homePercent, awayPercent, drawPercent),
+    aiEnhanced: !!openAITactics,
   };
 }
 
@@ -152,4 +174,7 @@ async function getSeasonForecast() {
 module.exports = {
   predictMatch,
   getSeasonForecast,
+  askAIAssistant,
+  getOpenAIStatus,
 };
+

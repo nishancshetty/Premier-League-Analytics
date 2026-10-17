@@ -21,8 +21,13 @@ function CommandCenter() {
         </div>
 
         <div className="command-item">
-          <span>Live Matches</span>
-          <strong>ACTIVE</strong>
+          <span>News & Media API</span>
+          <strong>CONNECTED</strong>
+        </div>
+
+        <div className="command-item">
+          <span>Sportmonks API</span>
+          <strong>CONNECTED</strong>
         </div>
 
         <div className="command-item">

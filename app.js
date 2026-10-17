@@ -13,6 +13,7 @@ const aiRoutes = require("./routes/aiRoutes");
 const liveRoutes = require("./routes/liveRoutes");
 const newsRoutes = require("./routes/newsRoutes");
 const searchRoutes = require("./routes/searchRoutes");
+const sportmonksRoutes = require("./routes/sportmonksRoutes");
 
 const app = express();
 
@@ -50,6 +51,8 @@ app.use("/api/ai", aiRoutes);
 app.use("/api/live", liveRoutes);
 app.use("/api/news", newsRoutes);
 app.use("/api/search", searchRoutes);
+app.use("/api/sportmonks", sportmonksRoutes);
+
 
 // 404 Handler
 app.use((req, res) => {

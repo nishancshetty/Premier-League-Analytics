@@ -14,6 +14,7 @@ import {
   getMatchPrediction,
   getSeasonForecast,
   getStandings,
+  askAI,
 } from "../services/api";
 
 function AILab() {
@@ -25,6 +26,12 @@ function AILab() {
   const [forecast, setForecast] = useState(null);
   const [simulating, setSimulating] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  // AI Analyst Assistant State
+  const [aiPrompt, setAiPrompt] = useState("");
+  const [aiResponse, setAiResponse] = useState(null);
+  const [aiThinking, setAiThinking] = useState(false);
+
 
   // Load team dropdown options & season forecast
   useEffect(() => {
@@ -60,6 +67,27 @@ function AILab() {
       setTimeout(() => setSimulating(false), 400);
     }
   };
+
+  const handleAskAI = async (e) => {
+    e.preventDefault();
+    if (!aiPrompt.trim()) return;
+    setAiThinking(true);
+    try {
+      const res = await askAI(aiPrompt, {
+        homeTeam: prediction?.homeTeam?.name,
+        awayTeam: prediction?.awayTeam?.name,
+      });
+      setAiResponse(res);
+    } catch (err) {
+      setAiResponse({
+        success: false,
+        answer: "AI engine connection failed. Please check network telemetry.",
+      });
+    } finally {
+      setAiThinking(false);
+    }
+  };
+
 
   if (loading) {
     return (
@@ -349,6 +377,94 @@ function AILab() {
           </div>
         </div>
       )}
+
+      {/* Interactive AI Tactical Analyst Console (OpenAI Integration) */}
+      <div className="bg-gradient-to-r from-slate-900 via-slate-950 to-slate-900 border border-slate-800 rounded-3xl p-6 lg:p-8 shadow-2xl relative overflow-hidden">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-800">
+          <div>
+            <div className="flex items-center gap-2 text-xs font-bold text-cyan-400 uppercase tracking-widest mb-1">
+              <FaRobot /> PL/X Tactical Neural Assistant
+            </div>
+            <h3 className="text-xl font-extrabold text-white">Ask Tactical Intelligence</h3>
+            <p className="text-xs text-slate-400 mt-0.5">
+              Query custom scouting questions, set-piece analysis, or player counter-press schemes.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1.5 rounded-xl text-xs text-slate-300 font-mono">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+            <span>AI Engine Online</span>
+          </div>
+        </div>
+
+        {/* Query Input */}
+        <form onSubmit={handleAskAI} className="space-y-4">
+          <div className="flex flex-col sm:flex-row gap-3">
+            <input
+              type="text"
+              placeholder="e.g. How can Arsenal press Man City's inverted fullbacks to generate transition turnovers?"
+              value={aiPrompt}
+              onChange={(e) => setAiPrompt(e.target.value)}
+              className="flex-1 bg-slate-950 border border-slate-700/80 rounded-2xl px-5 py-3.5 text-sm text-white focus:border-cyan-400 focus:outline-none placeholder-slate-500 shadow-inner"
+            />
+            <button
+              type="submit"
+              disabled={aiThinking || !aiPrompt.trim()}
+              className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black px-6 py-3.5 rounded-2xl text-xs uppercase tracking-wider transition disabled:opacity-40 flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20"
+            >
+              {aiThinking ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin"></div>
+                  <span>Analyzing...</span>
+                </>
+              ) : (
+                <>
+                  <FaBrain />
+                  <span>Analyze</span>
+                </>
+              )}
+            </button>
+          </div>
+
+          {/* Quick preset chips */}
+          <div className="flex items-center gap-2 flex-wrap text-xs">
+            <span className="text-slate-500 font-semibold">Suggested:</span>
+            {[
+              "High press vs low block dynamics",
+              "Haaland vs Saliba duel breakdown",
+              "Midfield transition overload patterns",
+            ].map((chip) => (
+              <button
+                key={chip}
+                type="button"
+                onClick={() => setAiPrompt(chip)}
+                className="bg-slate-800/60 hover:bg-slate-800 text-slate-300 px-3 py-1 rounded-lg border border-slate-700/60 transition text-[11px]"
+              >
+                {chip}
+              </button>
+            ))}
+          </div>
+        </form>
+
+        {/* AI Answer Box */}
+        {aiResponse && (
+          <div className="mt-6 bg-slate-950/90 border border-cyan-500/30 rounded-2xl p-5 shadow-xl relative animate-fadeIn">
+            <div className="flex items-center justify-between mb-3 text-xs pb-2 border-b border-slate-800">
+              <span className="font-bold text-cyan-400 flex items-center gap-1.5">
+                <FaRobot /> {aiResponse.source || "OpenAI Intelligence Briefing"}
+              </span>
+              {aiResponse.model && (
+                <span className="text-[10px] font-mono text-slate-400 uppercase bg-white/5 px-2 py-0.5 rounded border border-white/10">
+                  {aiResponse.model}
+                </span>
+              )}
+            </div>
+            <p className="text-sm text-slate-200 leading-relaxed whitespace-pre-line">
+              {aiResponse.answer}
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

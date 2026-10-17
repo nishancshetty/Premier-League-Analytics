@@ -115,11 +115,11 @@ function Dashboard() {
               </button>
 
               <button
-                onClick={() => navigate("/live")}
+                onClick={() => navigate("/fixtures")}
                 className="pl-btn-glass flex items-center gap-2.5"
               >
-                <FaBolt className="text-[#FF5F57]" />
-                <span>LIVE BROADCAST</span>
+                <FaFutbol className="text-[#1EF2C5]" />
+                <span>VIEW FIXTURES</span>
               </button>
             </div>
           </div>
@@ -149,18 +149,18 @@ function Dashboard() {
         <div className="pl-glass-panel p-6 shadow-xl relative overflow-hidden group">
           <div className="flex items-center justify-between mb-4">
             <span className="text-xs font-black text-[#777777] uppercase tracking-[2px]">
-              Live In-Play
+              Matchweek
             </span>
-            <div className="w-10 h-10 rounded-2xl bg-[#FF5F57]/10 border border-[#FF5F57]/20 flex items-center justify-center text-[#FF5F57]">
-              <FaBolt className="animate-pulse" />
+            <div className="w-10 h-10 rounded-2xl bg-[#1EF2C5]/10 border border-[#1EF2C5]/20 flex items-center justify-center text-[#1EF2C5]">
+              <FaTrophy />
             </div>
           </div>
           <div className="text-4xl sm:text-5xl font-black text-white font-mono tracking-tight">
-            {dashboardData?.liveMatchesCount || 1}
+            GW 7
           </div>
-          <p className="text-xs font-bold text-[#FF5F57] mt-2 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#FF5F57] animate-ping"></span>
-            Simulated live broadcast
+          <p className="text-xs font-bold text-[#1EF2C5] mt-2 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#1EF2C5] animate-pulse"></span>
+            2025/26 Season Active
           </p>
         </div>
 
@@ -379,73 +379,78 @@ function Dashboard() {
 
         {/* Right Column: Live Broadcast Card & AI Spotlight */}
         <div className="space-y-8">
-          {/* Live Broadcast Card */}
+          {/* Featured Matchweek Clash Card */}
           <div className="pl-glass-panel p-6 sm:p-8 shadow-2xl relative overflow-hidden group">
             <div className="flex items-center justify-between mb-5">
-              <div className="flex items-center gap-2 bg-[#FF5F57]/15 text-[#FF5F57] px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-widest border border-[#FF5F57]/30">
-                <span className="w-2 h-2 rounded-full bg-[#FF5F57] animate-ping"></span>
-                <span>{liveMatch?.status || "LIVE NOW"}</span>
+              <div className="flex items-center gap-2 bg-[#1EF2C5]/10 text-[#1EF2C5] px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-widest border border-[#1EF2C5]/30">
+                <span className="w-2 h-2 rounded-full bg-[#1EF2C5] animate-pulse"></span>
+                <span>MATCHWEEK 7 CLASH</span>
               </div>
-              <span className="text-[#1EF2C5] font-mono font-black text-sm bg-black/60 px-3 py-1 rounded-xl border border-[rgba(255,255,255,0.1)]">
-                {liveMatch?.minute || 67}'
+              <span className="text-[#1EF2C5] font-mono font-black text-xs bg-black/60 px-3 py-1 rounded-xl border border-[rgba(255,255,255,0.1)]">
+                SUMMIT CLASH
               </span>
             </div>
 
             <div className="flex items-center justify-between my-6">
               <div className="text-center flex-1">
-                {liveMatch?.homeTeam?.crest && (
-                  <img src={liveMatch.homeTeam.crest} alt="home" className="w-14 h-14 mx-auto object-contain mb-2" />
-                )}
+                <img
+                  src="https://crests.football-data.org/65.png"
+                  alt="Man City"
+                  className="w-14 h-14 mx-auto object-contain mb-2"
+                />
                 <h3 className="font-black text-sm text-white">
-                  {liveMatch?.homeTeam?.name || liveMatch?.homeTeam || "Man City"}
+                  Man City
                 </h3>
-                <span className="text-[10px] font-bold text-[#777777] uppercase tracking-wider">Home</span>
+                <span className="text-[10px] font-bold text-[#1EF2C5] uppercase tracking-wider">#1 • 18 PTS</span>
               </div>
 
               <div className="px-3 text-center">
-                <div className="text-5xl font-black text-white font-mono tracking-widest">
-                  {liveMatch?.homeScore ?? 2} : {liveMatch?.awayScore ?? 1}
+                <div className="text-4xl sm:text-5xl font-black text-white font-mono tracking-widest">
+                  VS
                 </div>
                 <span className="text-[10px] text-[#1EF2C5] font-bold uppercase tracking-widest mt-1 block font-mono">
-                  xG {liveMatch?.stats?.xG?.home ?? 1.84} - {liveMatch?.stats?.xG?.away ?? 1.22}
+                  xG 3.47 - 1.73
                 </span>
               </div>
 
               <div className="text-center flex-1">
-                {liveMatch?.awayTeam?.crest && (
-                  <img src={liveMatch.awayTeam.crest} alt="away" className="w-14 h-14 mx-auto object-contain mb-2" />
-                )}
+                <img
+                  src="https://crests.football-data.org/57.png"
+                  alt="Arsenal"
+                  className="w-14 h-14 mx-auto object-contain mb-2"
+                />
                 <h3 className="font-black text-sm text-white">
-                  {liveMatch?.awayTeam?.name || liveMatch?.awayTeam || "Liverpool"}
+                  Arsenal
                 </h3>
-                <span className="text-[10px] font-bold text-[#777777] uppercase tracking-wider">Away</span>
+                <span className="text-[10px] font-bold text-[#FF5F57] uppercase tracking-wider">#2 • 15 PTS</span>
               </div>
             </div>
 
-            {/* Possession Bar */}
+            {/* Projected Possession Bar */}
             <div className="space-y-2 mt-5 pt-5 border-t border-[rgba(255,255,255,0.08)] text-xs">
               <div className="flex justify-between font-bold">
-                <span className="text-[#1EF2C5] font-mono">{liveMatch?.stats?.possession?.home || 58}%</span>
-                <span className="text-[#777777] uppercase tracking-wider text-[11px]">Ball Possession</span>
-                <span className="text-[#FF5F57] font-mono">{liveMatch?.stats?.possession?.away || 42}%</span>
+                <span className="text-[#1EF2C5] font-mono">62% Possession</span>
+                <span className="text-[#777777] uppercase tracking-wider text-[11px]">AI Territory Projection</span>
+                <span className="text-[#FF5F57] font-mono">38% Possession</span>
               </div>
               <div className="w-full h-2.5 bg-black/60 rounded-full flex overflow-hidden">
                 <div
                   className="bg-[#1EF2C5] h-full transition-all duration-500"
-                  style={{ width: `${liveMatch?.stats?.possession?.home || 58}%` }}
+                  style={{ width: "62%" }}
                 ></div>
                 <div
                   className="bg-[#FF5F57] h-full transition-all duration-500"
-                  style={{ width: `${liveMatch?.stats?.possession?.away || 42}%` }}
+                  style={{ width: "38%" }}
                 ></div>
               </div>
             </div>
 
             <button
-              onClick={() => navigate("/live")}
+              onClick={() => navigate("/ai?home=65&away=57")}
               className="mt-6 w-full pl-btn-primary flex items-center justify-center gap-2 text-xs py-3.5"
             >
-              <span>OPEN MATCH TELEMETRY</span>
+              <FaRobot />
+              <span>SIMULATE IN AI LAB</span>
               <FaArrowRight />
             </button>
           </div>

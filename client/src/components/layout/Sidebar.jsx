@@ -16,13 +16,6 @@ const navItems = [
   { name: "Dashboard", path: "/dashboard", icon: <FaChartLine /> },
   { name: "Standings", path: "/standings", icon: <FaTrophy /> },
   { name: "Fixtures", path: "/fixtures", icon: <FaFutbol /> },
-  {
-    name: "Live Match",
-    path: "/live",
-    icon: <FaBolt className="text-[#FF5F57]" />,
-    badge: "LIVE",
-    badgeColor: "bg-[#FF5F57]/20 text-[#FF5F57] border border-[#FF5F57]/40 animate-pulse",
-  },
   { name: "Clubs", path: "/teams", icon: <FaShieldAlt /> },
   { name: "Players", path: "/players", icon: <FaUsers /> },
   { name: "Comparison", path: "/compare", icon: <FaExchangeAlt /> },
@@ -40,7 +33,7 @@ const navItems = [
 function Sidebar({ collapsed }) {
   return (
     <aside
-      className={`fixed top-0 left-0 bottom-0 z-40 bg-[#050505]/95 backdrop-blur-2xl border-r border-[rgba(255,255,255,0.08)] transition-all duration-300 flex flex-col ${
+      className={`sticky top-0 h-screen flex-shrink-0 z-40 bg-[#050505]/95 backdrop-blur-2xl border-r border-[rgba(255,255,255,0.08)] transition-all duration-300 flex flex-col ${
         collapsed ? "w-20" : "w-64"
       }`}
     >
