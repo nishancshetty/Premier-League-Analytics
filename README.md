@@ -1,164 +1,332 @@
-# ⚽ Premier League Analytics Platform
-
 <div align="center">
 
-**A Full-Stack Football Analytics Platform Inspired by Sofascore, FBref, and Opta**
+# ⚽ Premier League Analytics Platform
 
-Real-time statistics • AI Match Predictions • Interactive Analytics • Live Updates
+### The Ultimate Football Operating System for the English Premier League
 
-![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge\&logo=react)
-![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge\&logo=node.js)
-![MongoDB](https://img.shields.io/badge/MongoDB-Database-47A248?style=for-the-badge\&logo=mongodb)
-![Python](https://img.shields.io/badge/Python-AI-3776AB?style=for-the-badge\&logo=python)
-![Socket.io](https://img.shields.io/badge/Socket.io-Real--Time-010101?style=for-the-badge\&logo=socketdotio)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+Real-Time Football Data • AI-Powered Insights • Advanced Analytics • Interactive Dashboard
+
+---
+
+![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)
+![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge&logo=node.js)
+![MongoDB](https://img.shields.io/badge/Database-Ready-47A248?style=for-the-badge&logo=mongodb)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript)
+![Vite](https://img.shields.io/badge/Vite-Frontend-646CFF?style=for-the-badge&logo=vite)
+![OpenAI](https://img.shields.io/badge/OpenAI-AI%20Powered-412991?style=for-the-badge&logo=openai)
 
 </div>
 
 ---
 
-## 📖 About
+# About the Project
 
-**Premier League Analytics Platform** is a modern full-stack web application that provides football fans with real-time Premier League statistics, advanced analytics, AI-powered match predictions, and interactive dashboards.
+**Premier League Analytics Platform** is a modern football analytics application inspired by platforms like **Sofascore**, **FotMob**, **FBref**, and **Opta**.
 
-Inspired by platforms like **Sofascore**, **FBref**, and **Opta**, the application combines live football data, detailed player and club statistics, visual analytics, and machine learning into one seamless experience.
+The goal of this project is to provide football fans with a single platform that combines:
 
----
+- Live football data
+- Advanced statistics
+- AI-powered insights
+- Team and player analysis
+- Interactive dashboards
+- Real-time match information
 
-## ✨ Key Features
-
-* 📊 Live Premier League Table
-* 📅 Fixtures & Results
-* 👤 Player Statistics
-* 🏟️ Team Statistics
-* 📈 Interactive Charts & Graphs
-* ⚽ Expected Goals (xG)
-* 🎯 Passing Accuracy
-* 🔥 Team Form Analysis
-* 🤖 AI Match Predictions
-* 📝 AI Match Summaries
-* ⚖️ Player Comparison
-* 🏆 Club Comparison
-* 🚑 Injury Updates
-* 💰 Transfer News
-* 🔔 Real-Time Updates with Socket.io
-* 🌙 Modern Responsive UI
+Unlike traditional football websites that simply display statistics, this platform aims to explain **why** things happen through analytics and artificial intelligence.
 
 ---
 
-## 🛠️ Tech Stack
+# Features
 
-### Frontend
+## Live Dashboard
 
-* React
-* Vite
-* Tailwind CSS
-* Chart.js
-* Axios
-
-### Backend
-
-* Node.js
-* Express.js
-* REST API
-* Socket.io
-
-### Database
-
-* MongoDB *(or PostgreSQL)*
-
-### AI & Analytics
-
-* Python
-* Scikit-learn
-* Pandas
-* NumPy
-
-### Tools
-
-* Git & GitHub
-* Postman
-* Docker *(Optional)*
+- League Table
+- Match Statistics
+- Recent Fixtures
+- League Overview
+- Dynamic Widgets
 
 ---
 
-## 📂 Project Structure
+## Teams
 
-```text
-Premier-League-Analytics/
+- All Premier League Clubs
+- Club Profiles
+- Club Statistics
+- Squad Information
+- Team Form
+- Club Analysis
+
+---
+
+## Players
+
+- Player Profiles
+- Performance Statistics
+- Player Comparison
+- AI Player Insights
+
+---
+
+## Fixtures
+
+- Upcoming Matches
+- Match Results
+- Fixture Calendar
+- Match Details
+
+---
+
+## Live Match Center
+
+- Live Scores
+- Match Events
+- Live Statistics
+- Match Timeline
+
+---
+
+## AI Lab
+
+The AI Lab brings artificial intelligence into football analysis.
+
+Examples include:
+
+- AI Match Analysis
+- Match Predictions
+- Tactical Insights
+- Team Strength Analysis
+- Player Performance Analysis
+- Future Match Predictions
+
+---
+
+# Tech Stack
+
+## Frontend
+
+- React
+- Vite
+- React Router
+- Axios
+- Framer Motion
+- React Icons
+
+---
+
+## Backend
+
+- Node.js
+- Express.js
+- REST API
+
+---
+
+## APIs
+
+- Football Data API
+- Sportmonks API
+- News API
+- OpenAI API
+
+---
+
+## Development Tools
+
+- Git
+- GitHub
+- VS Code
+- npm
+
+---
+
+# Folder Structure
+
+```
+Premier-League-Analytics
 │
-├── client/
-├── server/
-├── docs/
-├── screenshots/
-├── README.md
-└── LICENSE
+├── client
+│   ├── components
+│   ├── pages
+│   ├── services
+│   ├── layouts
+│   ├── hooks
+│   ├── styles
+│   └── App.jsx
+│
+├── controllers
+├── routes
+├── services
+├── middleware
+├── config
+├── utils
+├── sockets
+│
+├── app.js
+├── server.js
+└── package.json
 ```
 
 ---
 
-## 🚀 Getting Started
+# Project Architecture
 
-Clone the repository:
+```
+                React Frontend
+                       │
+                       ▼
+                Express Backend
+                       │
+      ┌────────────────┼────────────────┐
+      │                │                │
+Football Data     Sportmonks      News API
+      │                │                │
+      └────────────────┼────────────────┘
+                       │
+                    OpenAI
+                       │
+                       ▼
+             AI Analysis & Insights
+```
+
+---
+
+# Screens
+
+- Landing Page
+- Dashboard
+- Teams
+- Team Details
+- Fixtures
+- Live Match
+- Standings
+- Player Comparison
+- AI Lab
+
+---
+
+# Key Highlights
+
+- Modern UI
+- Responsive Design
+- AI Integration
+- Live Football Data
+- Modular Architecture
+- Reusable Components
+- RESTful Backend
+- Scalable Codebase
+
+---
+
+# Installation
+
+Clone the repository
 
 ```bash
-git clone https://github.com/your-username/Premier-League-Analytics.git
+git clone https://github.com/nishancshetty/Premier-League-Analytics.git
 ```
 
-Navigate to the project folder:
+Navigate into the project
 
 ```bash
 cd Premier-League-Analytics
 ```
 
-Install dependencies for both frontend and backend:
+Install backend dependencies
+
+```bash
+npm install
+```
+
+Install frontend dependencies
 
 ```bash
 cd client
 npm install
-
-cd ../server
-npm install
 ```
 
-Start the development servers:
+---
+
+# Environment Variables
+
+Create a `.env` file in the backend root.
+
+```env
+PORT=5001
+
+FOOTBALL_DATA_API_KEY=
+
+SPORTMONKS_API_TOKEN=
+
+NEWS_API_KEY=
+
+OPENAI_API_KEY=
+```
+
+---
+
+# Running the Project
+
+Backend
 
 ```bash
-# Frontend
 npm run dev
+```
 
-# Backend
+Frontend
+
+```bash
+cd client
 npm run dev
 ```
 
 ---
 
-## 🎯 Project Goals
+# Future Improvements
 
-* Build a modern football analytics platform
-* Provide real-time Premier League insights
-* Integrate AI for predictions and match analysis
-* Deliver an intuitive and responsive user experience
-* Showcase full-stack software engineering skills
-
----
-
-## 📌 Project Status
-
-🚧 **Currently in Active Development**
-
-New features, improvements, and optimizations are being added regularly.
+- User Authentication
+- Fantasy Premier League Integration
+- Heatmaps
+- Passing Networks
+- Expected Goals (xG)
+- AI Transfer Predictions
+- Injury Tracker
+- Notification System
+- Fantasy Team Builder
+- Mobile Application
 
 ---
 
-## 📄 License
+# Why I Built This
 
-This project is licensed under the **MIT License**.
+Football has evolved beyond goals and assists.
+
+Modern clubs use data, artificial intelligence, and advanced analytics to make decisions.
+
+This project is my attempt to combine software engineering with football by building a platform that delivers meaningful insights through modern web technologies and AI.
+
+---
+
+# Author
+
+## Nishan C Shetty
+
+Web Developer | Next.js Enthusiast | Football Analytics Developer
+
+GitHub
+
+https://github.com/nishancshetty
+
+LinkedIn
+
+https://www.linkedin.com/in/nishan-shetty-1526b8387
 
 ---
 
 <div align="center">
 
-⭐ If you like this project, consider giving it a **star** on GitHub!
+### ⭐ If you enjoyed this project, consider giving it a star!
+
+Built with ❤️ for football fans and developers.
 
 </div>
