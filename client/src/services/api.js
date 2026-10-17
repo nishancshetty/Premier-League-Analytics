@@ -1,56 +1,147 @@
 import axios from "axios";
 
-const API = axios.create({
-  baseURL:
-    import.meta.env.VITE_API_URL ||
-    "https://premier-league-analytics-1-rq3h.onrender.com/api",
+const isLocalhost =
+  typeof window !== "undefined" &&
+  (window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1");
+
+const DEFAULT_URL = isLocalhost
+  ? "http://localhost:5001/api"
+  : "https://premier-league-analytics-1-rq3h.onrender.com/api";
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || DEFAULT_URL;
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  timeout: 15000,
 });
 
-// ---------------- Dashboard ----------------
-export const getDashboard = () => API.get("/dashboard");
+export default api;
 
-// ---------------- Standings ----------------
-export const getStandings = () => API.get("/standings");
+export async function getDashboard() {
+  const { data } = await api.get("/dashboard");
+  return data.data;
+}
 
-// ---------------- Fixtures ----------------
-export const getFixtures = () => API.get("/fixtures");
+export async function getStandings() {
+  const { data } = await api.get("/standings");
+  return data;
+}
 
-// ---------------- Teams ----------------
-export const getTeam = (id) => API.get(`/teams/${id}`);
-export const getTeamMatches = (id) => API.get(`/teams/${id}/matches`);
+export async function getFixtures(params = {}) {
+  const { data } = await api.get("/fixtures", { params });
+  return data;
+}
 
-// ---------------- Players ----------------
-export const getPlayers = () => API.get("/players");
-export const getPlayer = (id) => API.get(`/players/${id}`);
-export const getTopScorers = () => API.get("/players/topscorers");
+export async function getTeams() {
+  const { data } = await api.get("/teams");
+  return data;
+}
 
-// ---------------- Analytics ----------------
-export const getAnalytics = () => API.get("/analytics");
+export async function getTeam(id) {
+  const { data } = await api.get(`/teams/${id}`);
+  return data;
+}
 
-// ---------------- AI ----------------
-export const getMatchPrediction = (matchId) =>
-  API.get(`/ai/predict/${matchId}`);
+export async function getTeamSquad(id) {
+  const { data } = await api.get(`/teams/${id}/players`);
+  return data;
+}
 
-export const getSeasonForecast = () =>
-  API.get("/ai/season-forecast");
+export async function getTeamMatches(id) {
+  const { data } = await api.get(`/teams/${id}/matches`);
+  return data;
+}
 
-export const askAI = (question) =>
-  API.post("/ai/chat", { question });
+export async function getPlayers(params = {}) {
+  const { data } = await api.get("/players", { params });
+  return data;
+}
 
-// ---------------- News ----------------
-export const getLatestNews = () => API.get("/news");
-export const getInjuries = () => API.get("/news/injuries");
-export const getTransfers = () => API.get("/news/transfers");
+export async function getPlayer(id) {
+  const { data } = await api.get(`/players/${id}`);
+  return data;
+}
 
-// ---------------- Comparison ----------------
-export const comparePlayers = (player1, player2) =>
-  API.post("/comparison/players", { player1, player2 });
+export async function getTopScorers() {
+  const { data } = await api.get("/players/scorers");
+  return data;
+}
 
-export const compareTeams = (team1, team2) =>
-  API.post("/comparison/teams", { team1, team2 });
+export async function getAnalytics() {
+  const { data } = await api.get("/analytics");
+  return data;
+}
 
-// ---------------- Search ----------------
-export const searchAll = (query) =>
-  API.get(`/search?q=${encodeURIComponent(query)}`);
+export async function compareTeams(team1, team2) {
+  const { data } = await api.get("/comparison", {
+    params: { team1, team2 },
+  });
+  return data;
+}
 
-export default API;
+export async function comparePlayers(player1, player2) {
+  const { data } = await api.get("/comparison/players", {
+    params: { player1, player2 },
+  });
+  return data;
+}
+
+export async function getMatchPrediction(homeTeam, awayTeam) {
+  const { data } = await api.get("/ai/predict", {
+    params: { homeTeam, awayTeam },
+  });
+  return data.data;
+}
+
+export async function getSeasonForecast() {
+  const { data } = await api.get("/ai/forecast");
+  return data.data;
+}
+
+export async function getInjuries() {
+  const { data } = await api.get("/news/injuries");
+  return data.data;
+}
+
+export async function getTransfers() {
+  const { data } = await api.get("/news/transfers");
+  return data.data;
+}
+
+export async function getLatestNews(params = {}) {
+  const { data } = await api.get("/news/latest", { params });
+  return data;
+}
+
+export async function getClubNews(clubName) {
+  const { data } = await api.get(`/news/club/${encodeURIComponent(clubName)}`);
+  return data;
+}
+
+export async function askAI(prompt, context = {}) {
+  const { data } = await api.post("/ai/ask", { prompt, context });
+  return data;
+}
+
+export async function getAIStatus() {
+  const { data } = await api.get("/ai/status");
+  return data.data;
+}
+
+export async function getSportmonksFixtures(params = {}) {
+  const { data } = await api.get("/sportmonks/fixtures", { params });
+  return data;
+}
+
+export async function getSportmonksStatus() {
+  const { data } = await api.get("/sportmonks/status");
+  return data.data;
+}
+
+export async function searchAll(query) {
+  const { data } = await api.get("/search", {
+    params: { q: query },
+  });
+  return data;
+}

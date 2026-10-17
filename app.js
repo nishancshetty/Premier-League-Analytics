@@ -19,10 +19,20 @@ const app = express();
 // Middleware
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://premier-league-analytics.vercel.app",
-    ],
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps, curl, server-to-server)
+      if (!origin) return callback(null, true);
+      // Allow all localhost, 127.0.0.1, Vercel deployments and Render
+      if (
+        origin.includes("localhost") ||
+        origin.includes("127.0.0.1") ||
+        origin.endsWith(".vercel.app") ||
+        origin.endsWith(".onrender.com")
+      ) {
+        return callback(null, true);
+      }
+      return callback(null, true);
+    },
     credentials: true,
   })
 );
