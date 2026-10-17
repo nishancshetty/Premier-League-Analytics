@@ -10,7 +10,6 @@
     "build:client": "npm --prefix client run build"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.3.3",
     "axios": "^1.20.0",
     "cors": "^2.8.6",
     "dotenv": "^18.0.4",
@@ -18,9 +17,7 @@
     "mongoose": "^9.10.3",
     "morgan": "^1.12.1",
     "node-cron": "^4.6.0",
-    "socket.io": "^4.8.4",
-    "socket.io-client": "^4.8.4",
-    "tailwindcss": "^4.3.3"
+    "socket.io": "^4.8.4"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"

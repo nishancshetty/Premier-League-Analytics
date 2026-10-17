@@ -49,4 +49,8 @@ export const comparePlayers = (player1, player2) =>
 export const compareTeams = (team1, team2) =>
   API.post("/comparison/teams", { team1, team2 });
 
+// ---------------- Search ----------------
+export const searchAll = (query) =>
+  API.get(`/search?q=${encodeURIComponent(query)}`);
+
 export default API;

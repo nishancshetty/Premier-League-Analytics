@@ -16,12 +16,21 @@ const sportmonksRoutes = require("./routes/sportmonksRoutes");
 
 const app = express();
 
-// Middlewares
-app.use(cors({ origin: "*" }));
+// Middleware
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://premier-league-analytics.vercel.app",
+    ],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 app.use(morgan("dev"));
 
-// Health / Welcome Route
+// Health Route
 app.get("/", (req, res) => {
   res.json({
     success: true,
@@ -31,12 +40,12 @@ app.get("/", (req, res) => {
   });
 });
 
-// Primary API Endpoints
+// API Routes
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/standings", standingsRoutes);
 app.use("/api/fixtures", fixturesRoutes);
 app.use("/api/matches", fixturesRoutes);
-app.use("/api/football/matches", fixturesRoutes); // Legacy alias
+app.use("/api/football/matches", fixturesRoutes);
 
 app.use("/api/teams", teamRoutes);
 app.use("/api/team", teamRoutes);
@@ -51,8 +60,7 @@ app.use("/api/news", newsRoutes);
 app.use("/api/search", searchRoutes);
 app.use("/api/sportmonks", sportmonksRoutes);
 
-
-// 404 Handler
+// 404
 app.use((req, res) => {
   res.status(404).json({
     success: false,
@@ -60,13 +68,13 @@ app.use((req, res) => {
   });
 });
 
-// Global Error Handler
+// Error Handler
 app.use((err, req, res, next) => {
-  console.error("Internal Server Error:", err);
+  console.error(err);
+
   res.status(500).json({
     success: false,
     message: "Internal Server Error",
-    error: process.env.NODE_ENV === "development" ? err.message : undefined,
   });
 });
 
