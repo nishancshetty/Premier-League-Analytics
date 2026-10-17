@@ -6,35 +6,47 @@ const API = axios.create({
     "https://premier-league-analytics-1-rq3h.onrender.com/api",
 });
 
-// Dashboard
+// ---------------- Dashboard ----------------
 export const getDashboard = () => API.get("/dashboard");
 
-// Standings
+// ---------------- Standings ----------------
 export const getStandings = () => API.get("/standings");
 
-// Fixtures
+// ---------------- Fixtures ----------------
 export const getFixtures = () => API.get("/fixtures");
 
-// Teams
-export const getTeams = () => API.get("/teams");
+// ---------------- Teams ----------------
 export const getTeam = (id) => API.get(`/teams/${id}`);
+export const getTeamMatches = (id) => API.get(`/teams/${id}/matches`);
 
-// Players
+// ---------------- Players ----------------
 export const getPlayers = () => API.get("/players");
+export const getPlayer = (id) => API.get(`/players/${id}`);
 export const getTopScorers = () => API.get("/players/topscorers");
 
-// Analytics
+// ---------------- Analytics ----------------
 export const getAnalytics = () => API.get("/analytics");
 
-// AI
+// ---------------- AI ----------------
 export const getMatchPrediction = (matchId) =>
   API.get(`/ai/predict/${matchId}`);
 
-// News
-export const getNews = () => API.get("/news");
+export const getSeasonForecast = () =>
+  API.get("/ai/season-forecast");
 
-// Search
-export const search = (query) =>
-  API.get(`/search?q=${encodeURIComponent(query)}`);
+export const askAI = (question) =>
+  API.post("/ai/chat", { question });
+
+// ---------------- News ----------------
+export const getLatestNews = () => API.get("/news");
+export const getInjuries = () => API.get("/news/injuries");
+export const getTransfers = () => API.get("/news/transfers");
+
+// ---------------- Comparison ----------------
+export const comparePlayers = (player1, player2) =>
+  API.post("/comparison/players", { player1, player2 });
+
+export const compareTeams = (team1, team2) =>
+  API.post("/comparison/teams", { team1, team2 });
 
 export default API;
